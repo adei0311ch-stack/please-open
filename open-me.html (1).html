@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pookie’s Birthday 💖</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            transition: background 1s ease;
+        }
+
+        .box {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            max-width: 90%;
+        }
+
+        h1 {
+            font-size: 48px;
+            animation: floatText 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
+        }
+
+        p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 12px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            background: #ffd166;
+            cursor: pointer;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 22px;
+            animation: floatUp 6s linear forwards;
+            opacity: 0.8;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            animation: fall 3s linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes floatUp {
+            from { transform: translateY(100vh); opacity: 1; }
+            to { transform: translateY(-10vh); opacity: 0; }
+        }
+
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        @keyframes floatText {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #ff9a9e, 0 0 20px #ff9a9e;
+            }
+            to {
+                text-shadow: 0 0 20px #ffd166, 0 0 30px #ffd166;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1 id="title">🤫 Psst…</h1>
+    <p id="message">This page knows something you don’t.</p>
+    <button id="btn" onclick="nextStage()">Tell me 👀</button>
+</div>
+
+<script>
+    let stage = 0;
+
+    // continuous hearts
+    setInterval(createHeart, 500);
+
+    function nextStage() {
+        stage++;
+
+        if(stage === 1){
+            // Birthday reveal with confetti
+            document.body.style.background =
+                "linear-gradient(135deg, #ff9a9e, #fad0c4)";
+            document.getElementById("title").innerText =
+                "🎉 Pookie’s Birthday Is Coming 🎉";
+            document.getElementById("message").innerText =
+                "Yes. This is officially a big deal.";
+            document.getElementById("btn").innerText =
+                "WAIT—WHAT 😍";
+
+            createConfetti();
+        }
+
+        else if(stage === 2){
+            document.body.style.background =
+                "linear-gradient(135deg, #42275a, #734b6d)";
+            document.getElementById("title").innerText =
+                "⏳ 3 DAYS TO GO ⏳";
+            document.getElementById("message").innerText =
+                "The countdown has officially begun…";
+            document.getElementById("btn").innerText =
+                "I’m ready 💖";
+        }
+
+        else if(stage === 3){
+            document.body.style.background =
+                "linear-gradient(135deg, #141e30, #243b55)";
+            document.getElementById("title").innerText =
+                "💭 Plans Are Brewing";
+            document.getElementById("message").innerText =
+                "Surprises are lining up quietly 🎁";
+            document.getElementById("btn").innerText =
+                "This feels suspicious 😌";
+        }
+
+        else if(stage === 4){
+            document.body.style.background =
+                "linear-gradient(135deg, #000428, #004e92)";
+            document.getElementById("title").innerText =
+                "💖 Almost Time 💖";
+            document.getElementById("message").innerText =
+                "Just a little more patience, Pookie… 🎂";
+            document.getElementById("btn").style.display =
+                "none";
+        }
+    }
+
+    function createHeart(){
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerText = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+    }
+
+    function createConfetti(){
+        for(let i=0;i<120;i++){
+            let confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.style.left = Math.random()*100 + "vw";
+            confetti.style.backgroundColor =
+                `hsl(${Math.random()*360},100%,50%)`;
+            document.body.appendChild(confetti);
+            setTimeout(()=>confetti.remove(),3000);
+        }
+    }
+</script>
+
+</body>
+</html>
