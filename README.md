@@ -1,1 +1,1 @@
-# please-open
+index.html
